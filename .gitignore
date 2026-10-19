@@ -1,0 +1,7 @@
+build/
+dist/
+nbproject/private/
+*.java~
+.LCK*~
+# Course assignment hand-out (not part of the deliverable)
+Lab 5 - JavaFX and MVC Pattern.pdf
