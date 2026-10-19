@@ -1,4 +1,4 @@
-package app;
+package ui;
 
 import java.net.URL;
 
@@ -16,15 +16,14 @@ import javafx.stage.Stage;
  * lives in the Controller, and all data lives in the Model, so this class stays
  * a thin launcher - consistent with the MVC separation.
  */
-public class MainApp extends Application {
+public class FXMain extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        URL view = getClass().getResource("/view/UserFormView.fxml");
-        Parent root = FXMLLoader.load(view);
+        Parent root = FXMLLoader.load(getClass().getResource("MainFXML.fxml"));
 
         Scene scene = new Scene(root);
-        URL css = getClass().getResource("/view/app.css");
+        URL css = getClass().getResource("app.css");
         if (css != null) {
             scene.getStylesheets().add(css.toExternalForm());
         }

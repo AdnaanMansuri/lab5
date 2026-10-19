@@ -8,12 +8,12 @@ The project is organised with the **Model–View–Controller (MVC)** pattern.
 
 ## MVC layout
 
-| Layer          | File(s)                               | Responsibility                                   |
-|----------------|---------------------------------------|--------------------------------------------------|
-| **Model**      | `src/model/User.java`                 | Plain data holder (name, age, email).            |
-| **View**       | `src/view/UserFormView.fxml` + `app.css` | The UI, editable in **Scene Builder**.        |
-| **Controller** | `src/controller/UserFormController.java` | Validation, building the model, showing the pop-up. |
-| **App**        | `src/app/MainApp.java`                | JavaFX entry point; loads the view.              |
+| Layer          | File(s)                                  | Responsibility                                   |
+|----------------|------------------------------------------|--------------------------------------------------|
+| **Model**      | `src/model/User.java`                    | Plain data holder (name, age, email).            |
+| **View**       | `src/ui/MainFXML.fxml` + `src/ui/app.css`| The UI, editable in **Scene Builder**.           |
+| **Controller** | `src/controller/MainFXMLController.java` | Validation, building the model, showing the pop-up. |
+| **App**        | `src/ui/FXMain.java`                     | JavaFX entry point; loads the view.              |
 
 The View knows nothing about validation, the Model knows nothing about the UI,
 and the Controller is the only place the two meet — the MVC separation the lab
@@ -21,7 +21,7 @@ asks for.
 
 ## Run
 
-Open the project in **NetBeans** and press **F6** (main class: `app.MainApp`).
+Open the project in **NetBeans** and press **F6** (main class: `ui.FXMain`).
 
 JavaFX is bundled in `lib/` (the official modular jars), so there is nothing
 extra to install. The project is configured to put those jars on the module
@@ -36,7 +36,7 @@ To run from the command line without the IDE:
 ```
 java -p "lib/javafx-base-21.0.6-win.jar;lib/javafx-graphics-21.0.6-win.jar;lib/javafx-controls-21.0.6-win.jar;lib/javafx-fxml-21.0.6-win.jar" ^
      --add-modules javafx.controls,javafx.fxml ^
-     -cp dist/lab5.jar app.MainApp
+     -cp dist/lab5.jar ui.FXMain
 ```
 
 ## Validations

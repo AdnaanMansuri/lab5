@@ -17,7 +17,7 @@
   and methods.
 -->
 <VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="controller.UserFormController"
+      fx:controller="controller.MainFXMLController"
       spacing="16.0" styleClass="root-pane">
     <padding>
         <Insets top="24.0" right="28.0" bottom="24.0" left="28.0"/>

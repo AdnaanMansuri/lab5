@@ -18,16 +18,16 @@ import model.User;
 /**
  * Controller for the user form (the "C" in MVC).
  *
- * It wires the View (UserFormView.fxml) to the Model (User). On submit it
+ * It wires the View (MainFXML.fxml) to the Model (User). On submit it
  * validates every field, shows inline error messages for anything invalid,
  * and - when everything is valid - builds a {@link User} and pops up a dialog
  * showing the details that were entered.
  */
-public class UserFormController implements Initializable {
+public class MainFXMLController implements Initializable {
 
     // --- Input fields injected from the FXML view ---
     @FXML private TextField nameField;
-    @FXML private Spinner<Integer> ageSpinner;   // constrained to 1-120 in the view
+    @FXML private Spinner<Integer> ageSpinner;   // range configured in initialize()
     @FXML private TextField emailField;
 
     // --- Inline error labels injected from the FXML view ---
