@@ -1,11 +1,16 @@
 package controller;
 
+import java.net.URL;
+import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 
 import model.User;
@@ -18,16 +23,15 @@ import model.User;
  * and - when everything is valid - builds a {@link User} and pops up a dialog
  * showing the details that were entered.
  */
-public class UserFormController {
+public class UserFormController implements Initializable {
 
     // --- Input fields injected from the FXML view ---
     @FXML private TextField nameField;
-    @FXML private TextField ageField;
+    @FXML private Spinner<Integer> ageSpinner;   // constrained to 1-120 in the view
     @FXML private TextField emailField;
 
     // --- Inline error labels injected from the FXML view ---
     @FXML private Label nameError;
-    @FXML private Label ageError;
     @FXML private Label emailError;
 
     // Basic, practical email pattern: something@something.tld
@@ -37,6 +41,17 @@ public class UserFormController {
     // Name: letters, spaces, apostrophes and hyphens, 2-50 chars.
     private static final Pattern NAME_PATTERN =
             Pattern.compile("^[A-Za-z][A-Za-z .'-]{1,49}$");
+
+    /**
+     * Called automatically by the FXMLLoader after the view is built.
+     * Sets up the age spinner so it only allows whole numbers from 1 to 120,
+     * starting at 18.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        ageSpinner.setValueFactory(
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 120, 18));
+    }
 
     /**
      * Handles the Submit button. Runs all validations first; if any fail the
@@ -62,25 +77,10 @@ public class UserFormController {
             valid = false;
         }
 
-        // --- Age validation ---
-        String ageText = safeText(ageField);
-        int age = -1;
-        if (ageText.isEmpty()) {
-            ageError.setText("Age is required.");
-            problems.append("• Age is required.\n");
-            valid = false;
-        } else if (!ageText.matches("\\d{1,3}")) {
-            ageError.setText("Age must be a whole number.");
-            problems.append("• Age must be a whole number.\n");
-            valid = false;
-        } else {
-            age = Integer.parseInt(ageText);
-            if (age < 1 || age > 120) {
-                ageError.setText("Age must be between 1 and 120.");
-                problems.append("• Age must be between 1 and 120.\n");
-                valid = false;
-            }
-        }
+        // --- Age ---
+        // The Spinner can only hold a whole number from 1 to 120, so it is
+        // always valid; we just read the chosen value.
+        int age = ageSpinner.getValue();
 
         // --- Email validation ---
         String email = safeText(emailField);
@@ -111,14 +111,13 @@ public class UserFormController {
     @FXML
     private void handleClear() {
         nameField.clear();
-        ageField.clear();
+        ageSpinner.getValueFactory().setValue(18);
         emailField.clear();
         clearErrors();
     }
 
     private void clearErrors() {
         nameError.setText("");
-        ageError.setText("");
         emailError.setText("");
     }
 

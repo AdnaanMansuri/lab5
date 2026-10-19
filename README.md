@@ -42,7 +42,8 @@ java -p "lib/javafx-base-21.0.6-win.jar;lib/javafx-graphics-21.0.6-win.jar;lib/j
 ## Validations
 
 - **Name** — required; 2–50 letters (spaces, `'` and `-` allowed).
-- **Age** — required; whole number between 1 and 120.
+- **Age** — chosen with a `Spinner` constrained to 1–120 (default 18), so it is
+  always a valid whole number.
 - **Email** — required; must match `something@something.tld`.
 
 Invalid fields show a red message inline **and** an error dialog listing every
